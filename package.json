@@ -7,10 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "pnpm pages:build && wrangler pages dev",
-    "deploy": "pnpm pages:build && wrangler pages deploy"
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.2",
@@ -71,7 +68,6 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.12",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -82,7 +78,6 @@
     "postcss-normalize": "^13.0.1",
     "sass": "^1.77.4",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5",
-    "wrangler": "^4.19.1"
+    "typescript": "^5"
   }
 }
