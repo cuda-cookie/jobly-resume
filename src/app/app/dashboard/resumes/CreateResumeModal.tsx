@@ -137,7 +137,7 @@ const TemplateThumbnail = ({
                         height: "297mm",
                         transform: `scale(${scale})`,
                         padding: `${template.spacing?.contentPadding || 32}px`,
-                        fontFamily: previewData.globalSettings?.fontFamily || "Alibaba PuHuiTi, sans-serif",
+                        fontFamily: "Alibaba PuHuiTi, sans-serif",
                     }}
                 >
                     <ResumeTemplateComponent
