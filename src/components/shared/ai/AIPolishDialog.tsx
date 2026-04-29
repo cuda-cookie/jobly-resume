@@ -63,6 +63,8 @@ export default function AIPolishDialog({
     openaiApiEndpoint,
     geminiApiKey,
     geminiModelId,
+    openrouterApiKey,
+    openrouterModelId,
     isConfigured
   } = useAIConfigStore();
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -131,7 +133,9 @@ export default function AIPolishDialog({
             ? openaiApiKey
             : selectedModel === "gemini"
               ? geminiApiKey
-              : deepseekApiKey;
+              : selectedModel === "openrouter"
+                ? openrouterApiKey
+                : deepseekApiKey;
       const modelId =
         selectedModel === "doubao"
           ? doubaoModelId
@@ -139,7 +143,9 @@ export default function AIPolishDialog({
             ? openaiModelId
             : selectedModel === "gemini"
               ? geminiModelId
-              : deepseekModelId;
+              : selectedModel === "openrouter"
+                ? openrouterModelId
+                : deepseekModelId;
 
       const response = await fetch("/api/polish", {
         method: "POST",

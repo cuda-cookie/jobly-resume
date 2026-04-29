@@ -100,27 +100,32 @@ export const useGrammarStore = create<GrammarStore>((set, get) => ({
       openaiModelId,
       openaiApiEndpoint,
       geminiApiKey,
-      geminiModelId
-    } = useAIConfigStore.getState();
+      geminiModelId,
+      openrouterApiKey,
+      openrouterModelId
+      } = useAIConfigStore.getState();
 
-    const config = AI_MODEL_CONFIGS[selectedModel];
-    const apiKey =
-      selectedModel === "doubao"
-        ? doubaoApiKey
-        : selectedModel === "openai"
-          ? openaiApiKey
-          : selectedModel === "gemini"
-            ? geminiApiKey
-            : deepseekApiKey;
-    const modelId =
-      selectedModel === "doubao"
-        ? doubaoModelId
-        : selectedModel === "openai"
-          ? openaiModelId
-          : selectedModel === "gemini"
-            ? geminiModelId
-            : deepseekModelId;
-
+      const config = AI_MODEL_CONFIGS[selectedModel];
+      const apiKey =
+        selectedModel === "doubao"
+          ? doubaoApiKey
+          : selectedModel === "openai"
+            ? openaiApiKey
+            : selectedModel === "gemini"
+              ? geminiApiKey
+              : selectedModel === "openrouter"
+                ? openrouterApiKey
+                : deepseekApiKey;
+      const modelId =
+        selectedModel === "doubao"
+          ? doubaoModelId
+          : selectedModel === "openai"
+            ? openaiModelId
+            : selectedModel === "gemini"
+              ? geminiModelId
+              : selectedModel === "openrouter"
+                ? openrouterModelId
+                : deepseekModelId;
     set({ isChecking: true });
 
     try {

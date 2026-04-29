@@ -19,6 +19,8 @@ const AISettingsPage = () => {
     openaiApiEndpoint,
     geminiApiKey,
     geminiModelId,
+    openrouterApiKey,
+    openrouterModelId,
     setDoubaoApiKey,
     setDoubaoModelId,
     setDeepseekApiKey,
@@ -27,6 +29,8 @@ const AISettingsPage = () => {
     setOpenaiApiEndpoint,
     setGeminiApiKey,
     setGeminiModelId,
+    setOpenrouterApiKey,
+    setOpenrouterModelId,
     selectedModel,
     setSelectedModel,
   } = useAIConfigStore();
@@ -40,7 +44,7 @@ const AISettingsPage = () => {
 
   const handleApiKeyChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: "doubao" | "deepseek" | "openai" | "gemini"
+    type: "doubao" | "deepseek" | "openai" | "gemini" | "openrouter"
   ) => {
     const newApiKey = e.target.value;
     if (type === "doubao") {
@@ -49,6 +53,8 @@ const AISettingsPage = () => {
       setDeepseekApiKey(newApiKey);
     } else if (type === "gemini") {
       setGeminiApiKey(newApiKey);
+    } else if (type === "openrouter") {
+      setOpenrouterApiKey(newApiKey);
     } else {
       setOpenaiApiKey(newApiKey);
     }
@@ -56,7 +62,7 @@ const AISettingsPage = () => {
 
   const handleModelIdChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: "doubao" | "deepseek" | "openai" | "gemini"
+    type: "doubao" | "deepseek" | "openai" | "gemini" | "openrouter"
   ) => {
     const newModelId = e.target.value;
     if (type === "doubao") {
@@ -65,6 +71,8 @@ const AISettingsPage = () => {
       setOpenaiModelId(newModelId);
     } else if (type === "gemini") {
       setGeminiModelId(newModelId);
+    } else if (type === "openrouter") {
+      setOpenrouterModelId(newModelId);
     }
   };
 
@@ -79,6 +87,16 @@ const AISettingsPage = () => {
   };
 
   const models = [
+    {
+      id: "openrouter",
+      name: "OpenRouter",
+      description: "Access DeepSeek V3 and other models via OpenRouter.",
+      icon: Sparkles,
+      link: "https://openrouter.ai/keys",
+      color: "text-blue-600",
+      bgColor: "bg-blue-50 dark:bg-blue-950/50",
+      isConfigured: !!openrouterApiKey,
+    },
     {
       id: "deepseek",
       name: t("dashboard.settings.ai.deepseek.title"),
@@ -173,10 +191,10 @@ const AISettingsPage = () => {
                     aria-label={`Select ${model.name}`}
                     onClick={() => {
                       setSelectedModel(
-                        model.id as "doubao" | "deepseek" | "openai" | "gemini"
+                        model.id as "doubao" | "deepseek" | "openai" | "gemini" | "openrouter"
                       );
                       setCurrentModel(
-                        model.id as "doubao" | "deepseek" | "openai" | "gemini"
+                        model.id as "doubao" | "deepseek" | "openai" | "gemini" | "openrouter"
                       );
                     }}
                     className={cn(
@@ -236,18 +254,20 @@ const AISettingsPage = () => {
                             ? openaiApiKey
                             : model.id === "gemini"
                             ? geminiApiKey
+                            : model.id === "openrouter"
+                            ? openrouterApiKey
                             : deepseekApiKey
                         }
                         onChange={(e) =>
                           handleApiKeyChange(
                             e,
-                            model.id as "doubao" | "deepseek" | "openai" | "gemini"
+                            model.id as "doubao" | "deepseek" | "openai" | "gemini" | "openrouter"
                           )
                         }
                         type="password"
                         placeholder={t(
                           `dashboard.settings.ai.${model.id}.apiKey`
-                        )}
+                        ) || `${model.name} API Key`}
                         className={cn(
                           "h-11",
                           "bg-white dark:bg-gray-900",
@@ -256,6 +276,25 @@ const AISettingsPage = () => {
                         )}
                       />
                     </div>
+
+                    {model.id === "openrouter" && (
+                      <div className="space-y-4">
+                        <Label className="text-base font-medium">
+                          Model ID
+                        </Label>
+                        <Input
+                          value={openrouterModelId}
+                          onChange={(e) => handleModelIdChange(e, "openrouter")}
+                          placeholder="e.deepseek/deepseek-chat"
+                          className={cn(
+                            "h-11",
+                            "bg-white dark:bg-gray-900",
+                            "border-gray-200 dark:border-gray-800",
+                            "focus:ring-2 focus:ring-primary/20"
+                          )}
+                        />
+                      </div>
+                    )}
 
                     {model.id === "doubao" && (
                       <div className="space-y-4">

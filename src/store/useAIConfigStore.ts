@@ -13,6 +13,8 @@ interface AIConfigState {
   openaiApiEndpoint: string;
   geminiApiKey: string;
   geminiModelId: string;
+  openrouterApiKey: string;
+  openrouterModelId: string;
   setSelectedModel: (model: AIModelType) => void;
   setDoubaoApiKey: (apiKey: string) => void;
   setDoubaoModelId: (modelId: string) => void;
@@ -23,13 +25,15 @@ interface AIConfigState {
   setOpenaiApiEndpoint: (endpoint: string) => void;
   setGeminiApiKey: (apiKey: string) => void;
   setGeminiModelId: (modelId: string) => void;
+  setOpenrouterApiKey: (apiKey: string) => void;
+  setOpenrouterModelId: (modelId: string) => void;
   isConfigured: () => boolean;
 }
 
 export const useAIConfigStore = create<AIConfigState>()(
   persist(
     (set, get) => ({
-      selectedModel: "doubao",
+      selectedModel: "openrouter",
       doubaoApiKey: "",
       doubaoModelId: "",
       deepseekApiKey: "",
@@ -39,6 +43,8 @@ export const useAIConfigStore = create<AIConfigState>()(
       openaiApiEndpoint: "",
       geminiApiKey: "",
       geminiModelId: "gemini-flash-latest",
+      openrouterApiKey: "",
+      openrouterModelId: "deepseek/deepseek-chat",
       setSelectedModel: (model: AIModelType) => set({ selectedModel: model }),
       setDoubaoApiKey: (apiKey: string) => set({ doubaoApiKey: apiKey }),
       setDoubaoModelId: (modelId: string) => set({ doubaoModelId: modelId }),
@@ -49,6 +55,8 @@ export const useAIConfigStore = create<AIConfigState>()(
       setOpenaiApiEndpoint: (endpoint: string) => set({ openaiApiEndpoint: endpoint }),
       setGeminiApiKey: (apiKey: string) => set({ geminiApiKey: apiKey }),
       setGeminiModelId: (modelId: string) => set({ geminiModelId: modelId }),
+      setOpenrouterApiKey: (apiKey: string) => set({ openrouterApiKey: apiKey }),
+      setOpenrouterModelId: (modelId: string) => set({ openrouterModelId: modelId }),
       isConfigured: () => {
         const state = get();
         const config = AI_MODEL_CONFIGS[state.selectedModel];
