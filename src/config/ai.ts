@@ -67,8 +67,8 @@ export const AI_MODEL_CONFIGS: Record<AIModelType, AIModelConfig> = {
     headers: (apiKey: string) => ({
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`,
-      "HTTP-Referer": "https://github.com/cuda-cookie/miro",
-      "X-Title": "Miro Resume",
+      "HTTP-Referer": "https://github.com/cuda-cookie/jobly",
+      "X-Title": "Jobly Resume",
     }),
     validate: (context: AIValidationContext) => !!context.openrouterApiKey,
   },

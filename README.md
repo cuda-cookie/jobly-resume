@@ -1,6 +1,6 @@
-# Miro Resume
+# Jobly Resume
 
-Miro Resume is a modern, AI-powered online resume editor built with TanStack Start, HeroUI, and Tailwind CSS. This is a 1:1 reproduction of Magic Resume, optimized for deployment on Vercel and using DeepSeek via OpenRouter for AI assistance.
+Jobly Resume is a modern, AI-powered online resume editor built with TanStack Start, HeroUI, and Tailwind CSS. This is a 1:1 reproduction of Magic Resume, optimized for deployment on Vercel and using DeepSeek via OpenRouter for AI assistance.
 
 ## Features
 
@@ -14,8 +14,8 @@ Miro Resume is a modern, AI-powered online resume editor built with TanStack Sta
 
 1. **Clone the repo**:
    ```bash
-   git clone https://github.com/cuda-cookie/miro.git
-   cd miro
+   git clone https://github.com/cuda-cookie/jobly.git
+   cd jobly
    ```
 
 2. **Install dependencies**:
@@ -29,7 +29,7 @@ Miro Resume is a modern, AI-powered online resume editor built with TanStack Sta
    ```
 
 4. **Build & Deploy**:
-   Connect your repository to [Vercel](https://vercel.com) and it will automatically deploy using the provided `vercel.json`.
+   Connect your repository to [Vercel](https://vercel.com) and it will automatically deploy.
 
 ## AI Configuration
 

@@ -215,7 +215,7 @@
 
 🎉 **Major Update: Migration to TanStack Start**
 
-This release marks a significant milestone for Magic Resume as we have completely migrated our core framework to [TanStack Start](https://tanstack.com/start/latest). This brings massive improvements in routing, performance, and developer experience.
+This release marks a significant milestone for Jobly Resume as we have completely migrated our core framework to [TanStack Start](https://tanstack.com/start/latest). This brings massive improvements in routing, performance, and developer experience.
 
 ### 🚀 Enhancements
 
