@@ -33,6 +33,11 @@ export const Route = createFileRoute("/api/polish")({
             customInstructions?: string;
           };
 
+          let effectiveApiKey = apiKey;
+          if (modelType === "openrouter" && process.env.OPENROUTER_API_KEY) {
+            effectiveApiKey = process.env.OPENROUTER_API_KEY;
+          }
+
           const modelConfig = AI_MODEL_CONFIGS[modelType as AIModelType];
           if (!modelConfig) {
             throw new Error("Invalid model type");
@@ -102,7 +107,7 @@ export const Route = createFileRoute("/api/polish")({
 
           const response = await fetch(modelConfig.url(apiEndpoint), {
             method: "POST",
-            headers: modelConfig.headers(apiKey),
+            headers: modelConfig.headers(effectiveApiKey),
             body: JSON.stringify({
               model: modelConfig.requiresModelId ? model : modelConfig.defaultModel,
               messages: [
