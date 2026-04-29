@@ -1,25 +1,38 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import fs from 'fs'
-import path from 'path'
 
-let server: any
+let serverHandler: any
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    // Load server on first request
-    if (!server) {
-      const serverModule = await import('../dist/server/server.js')
-      server = serverModule.default || serverModule
+    // Load server handler on first request
+    if (!serverHandler) {
+      const module = await import('../dist/server/server.js')
+      serverHandler = module.default || module.handler || module
     }
 
-    // Handle the request with server
-    if (typeof server === 'function') {
-      return server(req, res)
-    }
+    // Convert Vercel Request/Response to Web standard Request/Response
+    const url = new URL(req.url || '', `http://${req.headers.host}`)
+    const webRequest = new Request(url, {
+      method: req.method,
+      headers: new Headers(req.headers as Record<string, string>),
+      body: req.method !== 'GET' && req.method !== 'HEAD' ? req : undefined
+    })
 
-    res.status(500).json({ error: 'Server not properly configured' })
+    const response = await serverHandler(webRequest)
+
+    // Set response headers
+    response.headers.forEach((value, key) => {
+      res.setHeader(key, value)
+    })
+
+    // Set status code
+    res.status(response.status)
+
+    // Send response body
+    const body = await response.text()
+    res.send(body)
   } catch (error) {
-    console.error('Handler error:', error)
-    res.status(500).json({ error: String(error) })
+    console.error('Server handler error:', error)
+    res.status(500).json({ error: 'Internal Server Error', details: String(error) })
   }
 }
