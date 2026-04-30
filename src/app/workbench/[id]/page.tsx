@@ -1,5 +1,7 @@
 
-import React, { useState, useEffect, memo } from "react";
+"use client";
+
+import React, { useState, useEffect, memo, use } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Edit2, Menu, PanelLeft, Minimize2 } from "lucide-react";
 import { EditorHeader } from "@/components/editor/EditorHeader";
@@ -161,7 +163,8 @@ LayoutControls.displayName = "LayoutControls";
 
 export const runtime = "edge";
 
-export default function Home() {
+export default function Workbench({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [sidePanelCollapsed, setSidePanelCollapsed] = useState(false);
   const [editPanelCollapsed, setEditPanelCollapsed] = useState(false);
   const [previewPanelCollapsed, setPreviewPanelCollapsed] = useState(false);

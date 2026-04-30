@@ -1,8 +1,31 @@
-import createMiddleware from "@/i18n/compat/middleware";
-import { routing } from "./i18n/routing.public";
+import { NextRequest, NextResponse } from "next/server";
 
-export default createMiddleware(routing);
+const locales = ["en", "zh"];
+const defaultLocale = "zh";
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Check if there is any supported locale in the pathname
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+
+  if (pathnameHasLocale) return;
+
+  // Redirect if there is no locale
+  const locale = defaultLocale;
+  request.nextUrl.pathname = `/${locale}${pathname}`;
+  // e.g. incoming is /products
+  // The new URL is now /en-US/products
+  return NextResponse.redirect(request.nextUrl);
+}
 
 export const config = {
-  matcher: ["/", "/(zh|en)/:path*"]
+  matcher: [
+    // Skip all internal paths (_next)
+    "/((?!_next|api|images|public|fonts|favicon.ico|icon.png|logo.svg|robots.txt|sitemap.xml|web-shot.png).*)",
+    // Optional: only run on root (/)
+    // '/'
+  ],
 };
