@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.3.0",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "NITRO_PRESET=vercel vite build",
     "start": "node server.mjs",
     "preview": "vite preview",
     "release": "bumpp",
