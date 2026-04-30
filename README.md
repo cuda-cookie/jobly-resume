@@ -36,6 +36,39 @@ Jobly is a modern online resume editor that makes creating professional resumes 
 - Tiptap Editor
 - Lucide Icons
 
+## 📐 Technical Architecture
+
+```mermaid
+graph TD
+    User([User Browser])
+    
+    subgraph "Frontend (Next.js 15 Client Components)"
+        UI[React 19 / HeroUI / Tailwind]
+        Editor[Tiptap Rich Text Editor]
+        State[(Zustand / LocalStorage)]
+        Export[PDF Export Logic]
+    end
+
+    subgraph "Backend (Next.js 15 Route Handlers)"
+        API[API Routes /api/*]
+        Proxy[Image Proxy]
+    end
+
+    subgraph "External Services"
+        OR[OpenRouter / DeepSeek V3]
+        PDF[PDF Generation Service]
+    end
+
+    User <--> UI
+    UI <--> Editor
+    UI <--> State
+    Editor <--> API
+    API <--> OR
+    UI <--> Export
+    Export <--> PDF
+    UI <--> Proxy
+```
+
 ## 🚀 Quick Start
 
 1. Clone the project
