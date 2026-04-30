@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, ReactNode, useContext, useMemo } from "react";
 import type { Locale } from "@/i18n/config";
 import { createTranslator, Translator } from "./utils";
