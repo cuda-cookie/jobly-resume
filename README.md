@@ -1,44 +1,89 @@
-# Jobly Resume
+<div align="center">
 
-Jobly Resume is a modern, AI-powered online resume editor built with TanStack Start, HeroUI, and Tailwind CSS. This is a 1:1 reproduction of Magic Resume, optimized for deployment on Vercel and using DeepSeek via OpenRouter for AI assistance.
+# ✨ Jobly ✨
 
-## Features
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.0-purple)
 
-- **AI-Powered**: Use DeepSeek V3 via OpenRouter to polish your resume and check grammar.
-- **TanStack Start**: Built on the latest TanStack stack for type-safety and performance.
-- **Vercel Optimized**: Ready to deploy on Vercel with minimal configuration.
-- **Privacy First**: Your data stays in your browser's local storage.
-- **Rich Templates**: Multiple professional templates to choose from.
+Jobly is a modern online resume editor that makes creating professional resumes simple and enjoyable. Optimized for Vercel and built with Next.js 15 and Framer Motion, it supports real-time preview and custom themes.
 
-## Quick Start
+</div>
 
-1. **Clone the repo**:
-   ```bash
-   git clone https://github.com/cuda-cookie/jobly.git
-   cd jobly
-   ```
+## 📸 Screenshots
 
-2. **Install dependencies**:
-   ```bash
-   pnpm install
-   ```
+<img width="1200" alt="Jobly Preview" src="/web-shot.png" />
 
-3. **Run development server**:
-   ```bash
-   pnpm dev
-   ```
+## ✨ Features
 
-4. **Build & Deploy**:
-   Connect your repository to [Vercel](https://vercel.com) and it will automatically deploy.
+- 🚀 Built with Next.js 15 (App Router)
+- 💫 Smooth animations (Framer Motion)
+- 🎨 Custom theme support
+- 📱 Responsive design
+- 🌙 Dark mode
+- 📤 Export to PDF
+- 🔄 Real-time preview
+- 💾 Auto-save
+- 🔒 Local storage
 
-## AI Configuration
+## 🛠️ Tech Stack
 
-To use the AI features:
-1. Go to the **Settings** > **AI Configuration** page in the app.
-2. Select **OpenRouter**.
-3. Enter your [OpenRouter API Key](https://openrouter.ai/keys).
-4. (Optional) Set your preferred model (defaults to `deepseek/deepseek-chat`).
+- Next.js 15
+- TypeScript
+- Tailwind CSS
+- Zustand
+- Radix UI / HeroUI
+- Tiptap Editor
+- Lucide Icons
 
-## Credits
+## 🚀 Quick Start
 
-This project is based on the excellent work of [JOYCEQL/magic-resume](https://github.com/JOYCEQL/magic-resume).
+1. Clone the project
+
+```bash
+git clone https://github.com/cuda-cookie/jobly-k01-.git
+cd jobly-k01-
+```
+
+2. Install dependencies
+
+```bash
+pnpm install
+```
+
+3. Start development server
+
+```bash
+pnpm dev
+```
+
+4. Open browser and visit `http://localhost:3000`
+
+## 📦 Build and Deploy
+
+Jobly is optimized for Vercel deployment. Simply connect your GitHub repository and it will deploy automatically.
+
+```bash
+pnpm build
+```
+
+## 📝 License and Commercial Use
+
+The source code of this project is open-sourced under the **Apache 2.0** license, but with **strict commercial use restrictions**:
+
+- **Free for Personal Use**: Free to use purely for personal, non-commercial purposes (e.g., personal learning, creating your own resume).
+- **Commercial License Required**: Unauthorized commercial use is strictly prohibited. Any organization or individual that provides it as a service (SaaS/PaaS, etc.) to the public for profit, uses it for enterprise commercial operations, or conducts secondary commercial development, **must obtain a commercial license, regardless of whether the source code has been modified**.
+
+## 🗺️ Roadmap
+
+- [x] AI-assisted writing (OpenRouter / DeepSeek)
+- [x] Modern Next.js 15 architecture
+- [ ] Support for more resume templates
+- [ ] Support for more export formats
+- [ ] Import PDF, Markdown, etc.
+- [x] Auto one page
+- [ ] Online resume hosting
+
+## 📞 Contact
+
+For any inquiries or commercial licenses, please contact the maintainers via the repository issues or your preferred contact method.

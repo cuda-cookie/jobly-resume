@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { useTranslations, useLocale } from "@/i18n/compat/client";
+import { useTranslations } from "@/i18n/compat/client";
 import Link from "@/lib/link";
-import { Sun, Moon, FileText } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/shared/ThemeToggle";
-import { GitHubStars } from "@/components/shared/GitHubStars";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -24,7 +23,6 @@ export default function MobileMenu({
   extraItems = [],
 }: MobileMenuProps) {
   const t = useTranslations("home");
-  const locale = useLocale();
 
   if (!isOpen) return null;
 
@@ -44,7 +42,6 @@ export default function MobileMenu({
                 <Moon className="h-[1.2rem] w-[1.2rem] absolute inset-0 m-auto rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               </div>
             </ThemeToggle>
-            <GitHubStars />
           </div>
 
 
@@ -62,7 +59,7 @@ export default function MobileMenu({
               className="bg-primary hover:opacity-90 text-white w-full py-6"
               asChild
             >
-              <Link href="/app/dashboard" onClick={onClose}>
+              <Link href="/dashboard" onClick={onClose}>
                 {buttonText}
               </Link>
             </Button>

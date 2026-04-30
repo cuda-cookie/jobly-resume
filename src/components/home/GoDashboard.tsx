@@ -13,9 +13,9 @@ export default function GoDashboard({
   const router = useRouter();
 
   const routeMap = {
-    dashboard: "/app/dashboard",
-    resumes: "/app/dashboard/resumes",
-    templates: "/app/dashboard/templates"
+    dashboard: "/dashboard",
+    resumes: "/dashboard/resumes",
+    templates: "/dashboard/templates"
   };
 
   return (

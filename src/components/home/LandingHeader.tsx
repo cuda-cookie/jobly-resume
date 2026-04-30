@@ -6,7 +6,6 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/shared/Logo";
 import ThemeToggle from "@/components/shared/ThemeToggle";
-import { GitHubStars } from "@/components/shared/GitHubStars";
 import ScrollHeader from "./client/ScrollHeader";
 import MobileMenu from "./client/MobileMenu";
 import GoDashboard from "./GoDashboard";
@@ -24,7 +23,7 @@ export default function LandingHeader() {
           <div className="flex items-center justify-between h-20">
             <div
               className="flex items-center  cursor-pointer group"
-              onClick={() => (window.location.href = `/${locale}/`)}
+              onClick={() => (window.location.href = "/")}
             >
               <Logo size={60} />
               <span className="font-serif text-[24px] tracking-tight font-semibold text-foreground/90">
@@ -39,7 +38,6 @@ export default function LandingHeader() {
                   <Moon className="h-[1.1rem] w-[1.1rem] absolute inset-0 m-auto rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 </div>
               </ThemeToggle>
-              <GitHubStars />
 
               <GoDashboard>
                 <Button
