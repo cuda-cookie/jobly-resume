@@ -3,7 +3,6 @@ import { Toaster } from "@/components/ui/sonner";
 
 type Props = {
   children: ReactNode;
-  params: Promise<{ locale: string }>;
 };
 
 export default function WorkbenchLayout({ children }: Props) {

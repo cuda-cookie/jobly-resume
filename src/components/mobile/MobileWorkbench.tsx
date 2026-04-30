@@ -75,7 +75,7 @@ export function MobileWorkbench({
               <div className="border-b bg-background/95 backdrop-blur z-10">
                 <ScrollArea className="w-full whitespace-nowrap">
                   <div className="flex p-2 space-x-2">
-                    {/* 基础信息 */}
+                    {/* Basic Info */}
                     <button
                       onClick={() => setActiveSection("basic")}
                       className={cn(
@@ -86,8 +86,8 @@ export function MobileWorkbench({
                       )}
                     >
                       <span className="mr-1.5">👤</span>
-                      基本信息
-                    </button>
+                      Basic Info
+                      </button>
                     
                     {/* 其他模块 */}
                     {menuSections
@@ -158,9 +158,9 @@ export function MobileWorkbench({
 
       {/* 底部导航栏 */}
       <div className="h-16 border-t bg-background flex items-center justify-around relative shadow-[0_-1px_3px_rgba(0,0,0,0.05)] z-50">
-        {renderNavItem("content", <FileText className="w-5 h-5" />, "内容")}
-        {renderNavItem("style", <Palette className="w-5 h-5" />, "样式")}
-        {renderNavItem("preview", <Eye className="w-5 h-5" />, "预览")}
+        {renderNavItem("content", <FileText className="w-5 h-5" />, "Content")}
+        {renderNavItem("style", <Palette className="w-5 h-5" />, "Style")}
+        {renderNavItem("preview", <Eye className="w-5 h-5" />, "Preview")}
       </div>
     </div>
   );

@@ -803,7 +803,7 @@
       },
       "export-failure": {
         "question": "What if export fails or style is broken?",
-        "answer": "1. We recommend using Google Chrome (https://www.google.cn/intl/zh-CN/chrome/) for best compatibility.\n2. If it still fails, try in 'Incognito Mode' to exclude extension interference.\n3. Alternatively, click 'PDF (Backup)' in the export menu and select 'Save as PDF' in the print dialog."
+        "answer": "1. We recommend using Google Chrome (https://www.google.com/chrome/) for best compatibility.\n2. If it still fails, try in 'Incognito Mode' to exclude extension interference.\n3. Alternatively, click 'PDF (Backup)' in the export menu and select 'Save as PDF' in the print dialog."
       },
       "export-methods": {
         "question": "What's the difference between the two export methods?",

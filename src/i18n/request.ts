@@ -1,24 +1,9 @@
 import { getRequestConfig } from "@/i18n/compat/server";
-import { defaultLocale, locales } from "./config";
-import { getUserLocale } from "./db";
+import { defaultLocale } from "./config";
 
-export default getRequestConfig(async (args: any) => {
-  const requestLocale = args.requestLocale;
-  // Read from potential `[locale]` segment
-  let locale = await requestLocale;
-
-  if (!locale) {
-    // The user is logged in
-    locale = await getUserLocale();
-  }
-
-  // Ensure that the incoming locale is valid
-  if (!locales.includes(locale as any)) {
-    locale = defaultLocale;
-  }
-
+export default getRequestConfig(async () => {
   return {
-    locale,
-    messages: (await import(`./locales/${locale}.json`)).default,
+    locale: defaultLocale,
+    messages: (await import(`./locales/${defaultLocale}.json`)).default,
   };
 });
