@@ -788,7 +788,7 @@ export const useResumeStore = create(
     }),
     {
       name: "resume-storage",
-      partialize: (state): PersistedResumeStore => ({
+      partialize: (state): any => ({
         resumes: state.resumes,
         activeResumeId: state.activeResumeId,
       }),

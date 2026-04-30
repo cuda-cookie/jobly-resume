@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, Palette, Eye } from "lucide-react";
@@ -11,7 +10,25 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 type TabType = "content" | "style" | "preview";
 
-export function MobileWorkbench() {
+interface MobileWorkbenchProps {
+  sidePanelCollapsed: boolean;
+  editPanelCollapsed: boolean;
+  previewPanelCollapsed: boolean;
+  toggleSidePanel: () => void;
+  toggleEditPanel: () => void;
+  togglePreviewPanel: () => void;
+  resumeContentRef: React.RefObject<HTMLDivElement | null>;
+}
+
+export function MobileWorkbench({
+  sidePanelCollapsed,
+  editPanelCollapsed,
+  previewPanelCollapsed,
+  toggleSidePanel,
+  toggleEditPanel,
+  togglePreviewPanel,
+  resumeContentRef,
+}: MobileWorkbenchProps) {
   const [activeTab, setActiveTab] = useState<TabType>("content");
   const { activeResume, setActiveSection } = useResumeStore();
   const { activeSection, menuSections } = activeResume || {};
@@ -21,7 +38,7 @@ export function MobileWorkbench() {
     <button
       onClick={() => setActiveTab(tab)}
       className={cn(
-        "flex flex-col items-center justify-center py-2 px-4 flex-1 transition-colors",
+        "flex flex-col items-center justify-center py-2 px-4 flex-1 transition-colors relative",
         activeTab === tab
           ? "text-primary"
           : "text-muted-foreground hover:text-primary/80"
@@ -131,6 +148,8 @@ export function MobileWorkbench() {
                 previewPanelCollapsed={false}
                 toggleSidePanel={() => {}}
                 toggleEditPanel={() => {}}
+                togglePreviewPanel={() => {}}
+                ref={resumeContentRef as any}
               />
             </motion.div>
           )}

@@ -46,7 +46,7 @@ interface PreviewDockProps {
   toggleSidePanel: () => void;
   toggleEditPanel: () => void;
   togglePreviewPanel: () => void;
-  resumeContentRef: React.RefObject<HTMLDivElement>;
+  resumeContentRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const Icons = {

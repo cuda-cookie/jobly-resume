@@ -27,7 +27,7 @@ export default function FAQSection() {
 
         <AnimatedFeature delay={0.2}>
           <Accordion type="single" collapsible className="w-full space-y-4">
-            {faqItems.map(
+            {(faqItems as any[]).map(
               (item: { question: string; answer: string }, index: number) => (
                 <AccordionItem 
                   key={index} 

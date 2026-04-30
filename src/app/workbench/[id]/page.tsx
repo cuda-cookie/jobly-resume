@@ -375,7 +375,15 @@ export default function Workbench({ params }: { params: Promise<{ id: string }> 
 
       {/* 移动端布局 */}
       <div className="md:hidden h-[calc(100vh-64px)]">
-        <MobileWorkbench />
+        <MobileWorkbench
+          sidePanelCollapsed={sidePanelCollapsed}
+          editPanelCollapsed={editPanelCollapsed}
+          previewPanelCollapsed={previewPanelCollapsed}
+          toggleSidePanel={toggleSidePanel}
+          toggleEditPanel={toggleEditPanel}
+          togglePreviewPanel={togglePreviewPanel}
+          resumeContentRef={resumeContentRef}
+        />
       </div>
     </main>
   );

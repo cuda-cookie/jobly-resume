@@ -1,6 +1,6 @@
 
 import React, { useMemo } from "react";
-import { useParams } from "@tanstack/react-router";
+import { useParams } from "next/navigation";
 import ResumeTemplateComponent from "../templates";
 import { cn } from "../../lib/utils";
 import { normalizeFontFamily } from "@/utils/fonts";
@@ -14,7 +14,7 @@ import {
 } from "@/lib/templatePreview";
 
 const IframeTemplateViewer = () => {
-  const { id } = useParams({ from: "/app/preview-template/$id" });
+  const { id } = useParams();
   const searchParams =
     typeof window !== "undefined"
       ? new URLSearchParams(window.location.search)
@@ -35,7 +35,8 @@ const IframeTemplateViewer = () => {
   const isSnapshotMode = searchParams?.get("snapshot") === "1";
 
   const template = useMemo(() => {
-    return getTemplateById(id);
+    const templateId = Array.isArray(id) ? id[0] : id;
+    return getTemplateById(templateId);
   }, [id]);
 
   const mockData = useMemo(() => {

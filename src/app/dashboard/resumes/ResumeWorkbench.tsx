@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "@/i18n/compat/client";
@@ -27,7 +29,8 @@ import {
     createResumeFromAIResult,
     toStringArray
 } from "./utils";
-import pdfWorkerUrl from "pdfjs-dist/legacy/build/pdf.worker.min.mjs?url";
+
+const pdfWorkerUrl = `https://unpkg.com/pdfjs-dist@5.4.624/legacy/build/pdf.worker.min.mjs`;
 
 const MAX_PDF_IMPORT_PAGES = 3;
 const PDF_IMAGE_QUALITY = 0.82;

@@ -41,6 +41,10 @@ export const storeFileHandle = async (
   if (!db) throw new Error("Database not initialized");
 
   return new Promise((resolve, reject) => {
+    if (!db) {
+      reject(new Error("Database not initialized"));
+      return;
+    }
     const transaction = db.transaction(HANDLE_STORE, "readwrite");
     const store = transaction.objectStore(HANDLE_STORE);
     const request = store.put(handle, key);
@@ -57,6 +61,10 @@ export const getFileHandle = async (
   if (!db) throw new Error("Database not initialized");
 
   return new Promise((resolve, reject) => {
+    if (!db) {
+      reject(new Error("Database not initialized"));
+      return;
+    }
     const transaction = db.transaction(HANDLE_STORE, "readonly");
     const store = transaction.objectStore(HANDLE_STORE);
     const request = store.get(key);
@@ -71,6 +79,10 @@ export const storeConfig = async (key: string, value: any): Promise<void> => {
   if (!db) throw new Error("Database not initialized");
 
   return new Promise((resolve, reject) => {
+    if (!db) {
+      reject(new Error("Database not initialized"));
+      return;
+    }
     const transaction = db.transaction(CONFIG_STORE, "readwrite");
     const store = transaction.objectStore(CONFIG_STORE);
     const request = store.put(value, key);
@@ -85,6 +97,10 @@ export const getConfig = async (key: string): Promise<any> => {
   if (!db) throw new Error("Database not initialized");
 
   return new Promise((resolve, reject) => {
+    if (!db) {
+      reject(new Error("Database not initialized"));
+      return;
+    }
     const transaction = db.transaction(CONFIG_STORE, "readonly");
     const store = transaction.objectStore(CONFIG_STORE);
     const request = store.get(key);
@@ -96,7 +112,7 @@ export const getConfig = async (key: string): Promise<any> => {
 
 export const verifyPermission = async (
   handle: FileSystemHandle,
-  mode: FileSystemPermissionMode = "readwrite"
+  mode: "read" | "readwrite" = "readwrite"
 ): Promise<boolean> => {
   if (!handle) {
     return false;
@@ -105,12 +121,12 @@ export const verifyPermission = async (
   const options = { mode };
 
   // 检查当前权限
-  if ((await handle.queryPermission(options)) === "granted") {
+  if ((await (handle as any).queryPermission(options)) === "granted") {
     return true;
   }
 
   // 请求权限
-  if ((await handle.requestPermission(options)) === "granted") {
+  if ((await (handle as any).requestPermission(options)) === "granted") {
     return true;
   }
 

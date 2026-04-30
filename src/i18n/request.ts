@@ -2,7 +2,8 @@ import { getRequestConfig } from "@/i18n/compat/server";
 import { defaultLocale, locales } from "./config";
 import { getUserLocale } from "./db";
 
-export default getRequestConfig(async ({ requestLocale }) => {
+export default getRequestConfig(async (args: any) => {
+  const requestLocale = args.requestLocale;
   // Read from potential `[locale]` segment
   let locale = await requestLocale;
 

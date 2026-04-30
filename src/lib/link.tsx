@@ -1,21 +1,30 @@
-import { Link as TanStackLink } from "@tanstack/react-router";
+"use client";
+
+import NextLink from "next/link";
 import { AnchorHTMLAttributes, forwardRef, PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<
-  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
-    href: string;
+  AnchorHTMLAttributes<HTMLAnchorElement> & {
+    to?: string;
+    href?: string;
+    params?: Record<string, string>;
+    search?: any;
   }
 >;
 
-const Link = forwardRef<HTMLAnchorElement, Props>(function Link(
-  { href, children, ...rest },
-  ref
-) {
-  return (
-    <TanStackLink ref={ref} to={href} {...(rest as any)}>
-      {children}
-    </TanStackLink>
-  );
-});
+export const Link = forwardRef<HTMLAnchorElement, Props>(
+  ({ to, href, children, ...props }, ref) => {
+    const targetHref = href || to || "#";
+    
+    // Simple Next.js Link wrapper
+    return (
+      <NextLink href={targetHref} ref={ref} {...props}>
+        {children}
+      </NextLink>
+    );
+  }
+);
+
+Link.displayName = "Link";
 
 export default Link;

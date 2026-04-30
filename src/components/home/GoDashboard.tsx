@@ -1,5 +1,7 @@
+"use client";
 
-import { useNavigate } from "@tanstack/react-router";
+import React from "react";
+import { useRouter } from "next/navigation";
 
 export default function GoDashboard({
   children,
@@ -8,7 +10,7 @@ export default function GoDashboard({
   children: React.ReactNode;
   type?: "dashboard" | "templates" | "resumes";
 }) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const routeMap = {
     dashboard: "/app/dashboard",
@@ -20,7 +22,7 @@ export default function GoDashboard({
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        navigate({ to: routeMap[type] });
+        router.push(routeMap[type]);
       }}
     >
       {children}

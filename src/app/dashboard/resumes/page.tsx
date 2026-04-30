@@ -1,3 +1,5 @@
+"use client";
+
 import { ResumeWorkbench } from "./ResumeWorkbench";
 
 export const runtime = "edge";

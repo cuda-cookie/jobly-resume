@@ -1,19 +1,15 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
-import { notFound } from "@/lib/navigation";
-import { NextIntlClientProvider } from "@/i18n/compat/client";
+import { notFound } from "next/navigation";
 import {
-  getMessages,
   getTranslations,
   setRequestLocale
 } from "@/i18n/compat/server";
-import Document from "@/components/Document";
 import { locales } from "@/i18n/config";
-import { Providers } from "@/app/providers";
 
 type Props = {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export function generateStaticParams() {
@@ -21,9 +17,10 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params: { locale }
+  params
 }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "common" });
+  const { locale } = await params;
+  const t = await getTranslations({ locale: locale as any, namespace: "common" });
   const baseUrl = "https://magicv.art";
 
   return {
@@ -43,21 +40,19 @@ export async function generateMetadata({
 
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params
 }: Props) {
-  setRequestLocale(locale);
-
+  const { locale } = await params;
+  
   if (!locales.includes(locale as any)) {
     notFound();
   }
 
-  const messages = await getMessages();
+  setRequestLocale(locale as any);
 
   return (
-    <Document locale={locale}>
-      <NextIntlClientProvider messages={messages}>
-        <Providers>{children}</Providers>
-      </NextIntlClientProvider>
-    </Document>
+    <>
+      {children}
+    </>
   );
 }

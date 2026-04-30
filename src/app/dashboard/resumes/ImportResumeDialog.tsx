@@ -16,8 +16,8 @@ interface ImportResumeDialogProps {
   open: boolean;
   isImporting: boolean;
   onOpenChange: (open: boolean) => void;
-  jsonFileInputRef: React.RefObject<HTMLInputElement>;
-  pdfFileInputRef: React.RefObject<HTMLInputElement>;
+  jsonFileInputRef: React.RefObject<HTMLInputElement | null>;
+  pdfFileInputRef: React.RefObject<HTMLInputElement | null>;
   onJsonFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onPdfFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -87,7 +87,7 @@ const AlignSelector: React.FC<AlignSelectorProps> = ({ value, onChange }) => {
         >
           {/* Icon wrapper to control size */}
           <div className="w-10 h-10 flex items-center justify-center">
-            {React.cloneElement(layout.icon as React.ReactElement, {
+            {React.cloneElement(layout.icon as any, {
               width: "100%",
               height: "100%",
               className: "fill-current"

@@ -1,37 +1,20 @@
-import { Link as RouterLink, useLocation } from "@tanstack/react-router";
-import { ComponentProps } from "react";
-import { Locale } from "@/i18n/config";
-import { replacePathLocale } from "@/i18n/runtime";
+"use client";
 
-export function defineRouting<T extends Record<string, unknown>>(config: T) {
-  return config;
-}
+import { Link as CustomLink } from "@/lib/link";
+import { useLocation as CustomUseLocation } from "@/lib/navigation";
 
-export function createNavigation(_routing: {
-  locales: readonly Locale[];
-  defaultLocale: Locale;
-}) {
-  function Link({
-    href,
-    locale,
-    ...rest
-  }: Omit<ComponentProps<typeof RouterLink>, "to"> & {
-    href: string;
-    locale?: Locale;
-  }) {
-    const to = locale ? replacePathLocale(href, locale) : href;
-    return <RouterLink to={to} {...rest} />;
-  }
+export const Link = CustomLink;
+export const useLocation = CustomUseLocation;
 
-  function usePathname() {
-    return useLocation({
-      select: (location) => location.pathname
-    });
-  }
-
-  return {
-    Link,
-    usePathname
-  };
-}
-
+// Stubs for next-intl compatibility if needed
+export const defineRouting = (config: any) => config;
+export const createNavigation = (routing: any) => ({
+  Link: CustomLink,
+  usePathname: () => {
+    const { pathname } = CustomUseLocation();
+    return pathname;
+  },
+  useRouter: () => ({}),
+  redirect: () => ({}),
+  getPathname: () => ""
+});

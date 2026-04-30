@@ -40,7 +40,7 @@ export default async function RootLayout({ children }: Props) {
 
   return (
     <Document locale={locale}>
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <Providers>
           {children}
         </Providers>
