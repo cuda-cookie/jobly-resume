@@ -120,6 +120,4 @@ const AISettingsPage = () => {
   );
 };
 
-export const runtime = "edge";
-
 export default AISettingsPage;

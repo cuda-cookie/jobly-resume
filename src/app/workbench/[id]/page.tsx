@@ -161,8 +161,6 @@ const LayoutControls = memo(
 
 LayoutControls.displayName = "LayoutControls";
 
-export const runtime = "edge";
-
 export default function Workbench({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const [sidePanelCollapsed, setSidePanelCollapsed] = useState(false);

@@ -1,6 +1,4 @@
-import { redirect } from "@/lib/navigation";
-
-export const runtime = "edge";
+import { redirect } from "next/navigation";
 
 export default function Dashboard() {
   redirect("/dashboard/resumes");
