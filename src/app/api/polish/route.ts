@@ -21,7 +21,23 @@ const parseUpstreamError = (raw: string, fallback: string) => {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { apiKey, model, content, modelType, apiEndpoint } = body;
+    let { apiKey, model, content, modelType, apiEndpoint } = body;
+
+    // Use environment variables as fallback for production convenience
+    if (!apiKey) {
+      if (modelType === "openrouter") apiKey = process.env.OPENROUTER_API_KEY;
+      else if (modelType === "deepseek") apiKey = process.env.DEEPSEEK_API_KEY;
+      else if (modelType === "gemini") apiKey = process.env.GEMINI_API_KEY;
+      else if (modelType === "doubao") apiKey = process.env.DOUBAO_API_KEY;
+      else if (modelType === "openai") apiKey = process.env.OPENAI_API_KEY;
+    }
+
+    if (!apiKey) {
+      return Response.json(
+        { error: "API Key is required. Please configure it in Settings > AI." },
+        { status: 400 }
+      );
+    }
 
     const modelConfig = AI_MODEL_CONFIGS[modelType as AIModelType];
     if (!modelConfig) {
