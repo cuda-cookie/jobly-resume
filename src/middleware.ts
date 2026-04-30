@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const locales = ["en", "zh"];
-const defaultLocale = "zh";
+const locales = ["en"];
+const defaultLocale = "en";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -16,8 +16,6 @@ export function middleware(request: NextRequest) {
   // Redirect if there is no locale
   const locale = defaultLocale;
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  // e.g. incoming is /products
-  // The new URL is now /en-US/products
   return NextResponse.redirect(request.nextUrl);
 }
 
@@ -25,7 +23,5 @@ export const config = {
   matcher: [
     // Skip all internal paths (_next)
     "/((?!_next|api|images|public|fonts|favicon.ico|icon.png|logo.svg|robots.txt|sitemap.xml|web-shot.png).*)",
-    // Optional: only run on root (/)
-    // '/'
   ],
 };

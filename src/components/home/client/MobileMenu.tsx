@@ -1,11 +1,9 @@
-
 import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "@/i18n/compat/client";
 import Link from "@/lib/link";
 import { Sun, Moon, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/shared/ThemeToggle";
-import LanguageSwitch from "@/components/shared/LanguageSwitch";
 import { GitHubStars } from "@/components/shared/GitHubStars";
 
 interface MobileMenuProps {
@@ -40,7 +38,6 @@ export default function MobileMenu({
       <div className="bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t border-b dark:border-gray-800">
         <nav className="mx-auto max-w-[1200px] px-4 py-6 flex flex-col gap-6">
           <div className="flex items-center justify-center gap-8">
-            <LanguageSwitch />
             <ThemeToggle>
               <div className="w-8 h-8 relative cursor-pointer rounded-md hover:bg-accent/50 flex items-center justify-center">
                 <Sun className="h-[1.2rem] w-[1.2rem] absolute inset-0 m-auto rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

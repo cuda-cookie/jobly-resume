@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { usePathname } from "@/lib/navigation";
 import { useTranslations } from "@/i18n/compat/client";
@@ -7,7 +6,6 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/shared/Logo";
 import ThemeToggle from "@/components/shared/ThemeToggle";
-import LanguageSwitch from "@/components/shared/LanguageSwitch";
 import { GitHubStars } from "@/components/shared/GitHubStars";
 import ScrollHeader from "./client/ScrollHeader";
 import MobileMenu from "./client/MobileMenu";
@@ -35,7 +33,6 @@ export default function LandingHeader() {
             </div>
 
             <div className="hidden md:flex items-center gap-4">
-              <LanguageSwitch />
               <ThemeToggle>
                 <div className="w-9 h-9 relative cursor-pointer rounded-xl hover:bg-accent/80 flex items-center justify-center transition-colors">
                   <Sun className="h-[1.1rem] w-[1.1rem] absolute inset-0 m-auto rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
