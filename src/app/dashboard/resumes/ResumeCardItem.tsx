@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import {
     Card,
     CardContent,
@@ -46,6 +47,7 @@ export const ResumeCardItem = ({
 }: ResumeCardItemProps) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [scale, setScale] = React.useState(0.24);
+    const [isNavigating, setIsNavigating] = React.useState(false);
     const activeTemplate =
         DEFAULT_TEMPLATES.find((template) => template.id === resume.templateId) ??
         DEFAULT_TEMPLATES[0];
@@ -80,10 +82,19 @@ export const ResumeCardItem = ({
                 className={cn(
                     "group border transition-all duration-200 aspect-[210/297] flex flex-col overflow-hidden",
                     "hover:border-primary/40 hover:shadow-lg",
-                    "dark:hover:border-primary/40"
+                    "dark:hover:border-primary/40",
+                    isNavigating && "opacity-80 pointer-events-none"
                 )}
             >
-                <CardContent className="p-0 flex-1 relative bg-gray-50 dark:bg-gray-900 overflow-hidden cursor-pointer">
+                <CardContent 
+                    className="p-0 flex-1 relative bg-gray-50 dark:bg-gray-900 overflow-hidden cursor-pointer"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setIsNavigating(true);
+                        setActiveResume(id);
+                        router.push(`/workbench/${id}`);
+                    }}
+                >
                     <div className="absolute inset-0 pb-6 flex items-center justify-center pointer-events-none transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden" ref={containerRef}>
                         <div className="w-full h-full relative origin-top bg-white">
                             <div
@@ -136,13 +147,15 @@ export const ResumeCardItem = ({
                                 variant="outline"
                                 className="w-full text-sm hover:bg-gray-100 dark:border-primary/50 dark:hover:bg-primary/10"
                                 size="sm"
+                                disabled={isNavigating}
                                 onClick={(e) => {
                                     e.stopPropagation();
+                                    setIsNavigating(true);
                                     setActiveResume(id);
-                                    router.push(`/app/workbench/${id}`);
+                                    router.push(`/workbench/${id}`);
                                 }}
                             >
-                                {t("common.edit")}
+                                {isNavigating ? <Loader2 className="w-4 h-4 animate-spin" /> : t("common.edit")}
                             </Button>
                         </motion.div>
 
@@ -161,6 +174,7 @@ export const ResumeCardItem = ({
                                         variant="outline"
                                         className="w-full text-sm text-red-600 hover:bg-red-50 hover:text-red-700 dark:text-red-500 dark:hover:bg-red-950/50 dark:hover:text-red-400"
                                         size="sm"
+                                        disabled={isNavigating}
                                         onClick={(e) => {
                                             e.stopPropagation();
                                         }}

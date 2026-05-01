@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "@/i18n/compat/client";
-import { AlertCircle, ShieldCheck, ShieldAlert } from "lucide-react";
+import { AlertCircle, ShieldCheck, ShieldAlert, Save } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRouter } from "@/lib/navigation";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import ThemeToggle from "../shared/ThemeToggle";
 import { useResumeStore } from "@/store/useResumeStore";
 import { getThemeConfig } from "@/theme/themeConfig";
 import { useGrammarCheck } from "@/hooks/useGrammarCheck";
+import { toast } from "sonner";
 import {
   HoverCard,
   HoverCardTrigger,
@@ -70,7 +71,7 @@ export function EditorHeader({ isMobile }: EditorHeaderProps) {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => {
-              router.push("/app/dashboard");
+              router.push("/dashboard");
             }}
           >
             <span className="text-lg font-semibold">{t("common.title")}</span>
@@ -94,7 +95,7 @@ export function EditorHeader({ isMobile }: EditorHeaderProps) {
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3, duration: 0.3 }}
-                    onClick={() => router.push("/app/dashboard/settings")}
+                    onClick={() => router.push("/dashboard/settings")}
                   >
                     {backupConfigured ? (
                       <>
@@ -149,11 +150,21 @@ export function EditorHeader({ isMobile }: EditorHeaderProps) {
             key={activeResume?.id || "resume-title"}
             defaultValue={activeResume?.title || ""}
             onBlur={(e) => {
-              updateResumeTitle(e.target.value || "未命名简历");
+              updateResumeTitle(e.target.value || "Untitled Resume");
             }}
             className="w-60  text-sm hidden md:block"
-            placeholder="简历名称"
+            placeholder="Resume Name"
           />
+
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="hidden md:flex items-center gap-2 h-9"
+            onClick={() => toast.success(t("common.saved") || "Draft saved!")}
+          >
+            <Save className="w-4 h-4 text-muted-foreground" />
+            Save Draft
+          </Button>
 
           <ThemeToggle></ThemeToggle>
           <div className="md:flex items-center ">

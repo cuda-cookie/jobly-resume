@@ -144,7 +144,7 @@ const PreviewDock = ({
     if (!activeResumeId) return;
     try {
       const newId = duplicateResume(activeResumeId);
-      const targetPath = `/app/workbench/${newId}`;
+      const targetPath = `/workbench/${newId}`;
       setActiveResume(newId);
       toast.success(t("copyResume.success"));
       router.push(targetPath);
@@ -369,7 +369,7 @@ const PreviewDock = ({
                         "flex cursor-pointer h-7 w-7 items-center justify-center rounded-lg",
                         "hover:bg-gray-100/50 dark:hover:bg-neutral-800/50"
                       )}
-                      onClick={() => router.push("/app/dashboard")}
+                      onClick={() => router.push("/dashboard")}
                     >
                       <Home className="h-4 w-4" />
                     </div>

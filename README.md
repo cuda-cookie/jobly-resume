@@ -1,122 +1,109 @@
 <div align="center">
 
-# ✨ Jobly ✨
+<img src="./public/icon.png" width="120" height="120" alt="Jobly Logo" />
+
+# Jobly Resume Editor
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ![Next.js](https://img.shields.io/badge/Next.js-15.5-black)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.0-purple)
 
-Jobly is a modern online resume editor that makes creating professional resumes simple and enjoyable. Optimized for Vercel and built with Next.js 15 and Framer Motion, it supports real-time preview and custom themes.
+A modern, highly-performant online resume editor that makes creating professional resumes simple and efficient. Optimized for Vercel and built with Next.js 15 and Framer Motion, it features real-time client-side preview, deep reasoning AI assistance, and flexible export capabilities.
 
 </div>
 
-## 📸 Screenshots
+---
 
-<img width="1200" alt="Jobly Preview" src="/web-shot.png" />
+## Technical Overview
 
-## ✨ Features
+Jobly is designed to provide a native-like application experience in the browser. By leveraging the latest Next.js App Router and Zustand for state management, it ensures that your data is handled efficiently and securely.
 
-- 🚀 Built with Next.js 15 (App Router)
-- 💫 Smooth animations (Framer Motion)
-- 🎨 Custom theme support
-- 📱 Responsive design
-- 🌙 Dark mode
-- 📤 Export to PDF
-- 🔄 Real-time preview
-- 💾 Auto-save
-- 🔒 Local storage
-
-## 🛠️ Tech Stack
-
-- Next.js 15
-- TypeScript
-- Tailwind CSS
-- Zustand
-- Radix UI / HeroUI
-- Tiptap Editor
-- Lucide Icons
-
-## 📐 Technical Architecture
+### Architecture
 
 ```mermaid
 graph TD
     User([User Browser])
     
-    subgraph "Frontend (Next.js 15 Client Components)"
-        UI[React 19 / HeroUI / Tailwind]
-        Editor[Tiptap Rich Text Editor]
-        State[(Zustand / LocalStorage)]
-        Export[PDF Export Logic]
+    subgraph "Frontend Architecture"
+        UI[Next.js 15 App Router / Tailwind CSS]
+        Editor[Tiptap Rich Text Engine]
+        State[(Zustand / IndexedDB Local Storage)]
+        Export[Client-Side Export Engine]
     end
 
-    subgraph "Backend (Next.js 15 Route Handlers)"
-        API[API Routes /api/*]
-        Proxy[Image Proxy]
+    subgraph "Backend Services"
+        API[Next.js Route Handlers /api/*]
     end
 
-    subgraph "External Services"
-        OR[OpenRouter / DeepSeek V3]
-        PDF[PDF Generation Service]
+    subgraph "AI Capabilities"
+        AI[Deep Reasoning AI Models]
     end
 
     User <--> UI
     UI <--> Editor
     UI <--> State
     Editor <--> API
-    API <--> OR
+    API <--> AI
     UI <--> Export
-    Export <--> PDF
-    UI <--> Proxy
 ```
 
-## 🚀 Quick Start
+## Key Features
 
-1. Clone the project
+- **Deep Reasoning AI Integration**: Utilizes advanced AI models to polish your writing, check grammar, and extract insights, acting as your personal resume consultant.
+- **Client-Side Rendering Engine**: Features a 100% Next.js-driven rendering engine. Exports to PDF, JSON, and Markdown are generated entirely within the browser for maximum privacy and zero latency.
+- **Real-Time Data Persistence**: Your progress is automatically saved to your local browser storage using IndexedDB, ensuring no data loss without requiring an account.
+- **Modern Tech Stack**: Built with Next.js 15, TypeScript, Tailwind CSS, Radix UI, and Tiptap Editor for a seamless editing experience.
+- **Responsive & Accessible**: Fully functional across devices with built-in dark mode and fluid animations powered by Framer Motion.
+- **Auto One-Page Optimizer**: Intelligently adjusts layout and spacing to ensure your resume fits perfectly on a single page.
 
+## Quick Start
+
+1. Clone the repository
 ```bash
 git clone https://github.com/cuda-cookie/jobly-k01-.git
 cd jobly-k01-
 ```
 
 2. Install dependencies
-
 ```bash
 pnpm install
 ```
 
-3. Start development server
+3. Configure Environment Variables
+Copy `.env.example` to `.env` and configure any necessary API keys for the AI capabilities.
 
+4. Start the development server
 ```bash
 pnpm dev
 ```
+Open your browser and visit `http://localhost:3000`.
 
-4. Open browser and visit `http://localhost:3000`
+## Build and Deploy
 
-## 📦 Build and Deploy
-
-Jobly is optimized for Vercel deployment. Simply connect your GitHub repository and it will deploy automatically.
+Jobly is optimized for seamless deployment on Vercel. Connect your GitHub repository to Vercel for automated deployments.
 
 ```bash
 pnpm build
+pnpm start
 ```
 
-## 📝 License and Commercial Use
+## License and Commercial Use
 
-The source code of this project is open-sourced under the **Apache 2.0** license, but with **strict commercial use restrictions**:
+The source code of this project is open-sourced under the **Apache 2.0** license, subject to the following **commercial use restrictions**:
 
-- **Free for Personal Use**: Free to use purely for personal, non-commercial purposes (e.g., personal learning, creating your own resume).
-- **Commercial License Required**: Unauthorized commercial use is strictly prohibited. Any organization or individual that provides it as a service (SaaS/PaaS, etc.) to the public for profit, uses it for enterprise commercial operations, or conducts secondary commercial development, **must obtain a commercial license, regardless of whether the source code has been modified**.
+- **Free for Personal Use**: You are free to use this application purely for personal, non-commercial purposes, such as creating and managing your own resumes.
+- **Commercial License Required**: Unauthorized commercial use is strictly prohibited. Any organization or individual intending to provide this as a service (SaaS/PaaS) to the public for profit, integrate it into enterprise operations, or conduct secondary commercial development must obtain a commercial license. This applies regardless of whether the source code has been modified.
 
-## 🗺️ Roadmap
+## Roadmap
 
-- [x] AI-assisted writing (OpenRouter / DeepSeek)
-- [x] Modern Next.js 15 architecture
-- [ ] Support for more resume templates
-- [ ] Support for more export formats
-- [ ] Import PDF, Markdown, etc.
-- [x] Auto one page
-- [ ] Online resume hosting
+- [x] Integrate Deep Reasoning AI for text refinement
+- [x] Migrate to Next.js 15 App Router architecture
+- [x] Client-side PDF generation and printing
+- [x] Implement Auto One-Page optimization
+- [ ] Add more professional templates
+- [ ] Support for importing from existing PDF/Markdown files
+- [ ] Cloud synchronization and hosting options
 
-## 📞 Contact
+## Contact
 
-For any inquiries or commercial licenses, please contact the maintainers via the repository issues or your preferred contact method.
+For inquiries regarding commercial licenses, partnerships, or support, please contact the maintainers via the repository issues or through official channels.

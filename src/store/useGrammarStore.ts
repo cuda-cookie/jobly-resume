@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { toast } from "sonner";
 import Mark from "mark.js";
 import { useAIConfigStore } from "@/store/useAIConfigStore";
-import { AI_MODEL_CONFIGS } from "@/config/ai";
+import { AI_MODEL_CONFIGS, DEFAULT_OPENROUTER_KEY } from "@/config/ai";
 import { cn } from "@/lib/utils";
 
 export interface GrammarError {
@@ -114,7 +114,7 @@ export const useGrammarStore = create<GrammarStore>((set, get) => ({
             : selectedModel === "gemini"
               ? geminiApiKey
               : selectedModel === "openrouter"
-                ? openrouterApiKey
+                ? (openrouterApiKey || DEFAULT_OPENROUTER_KEY)
                 : deepseekApiKey;
       const modelId =
         selectedModel === "doubao"

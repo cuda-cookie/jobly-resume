@@ -22,6 +22,8 @@ export interface AIModelConfig {
   validate: (context: AIValidationContext) => boolean;
 }
 
+export const DEFAULT_OPENROUTER_KEY = process.env.NEXT_PUBLIC_DEFAULT_OPENROUTER_KEY || "";
+
 export const AI_MODEL_CONFIGS: Record<AIModelType, AIModelConfig> = {
   doubao: {
     url: () => "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
@@ -70,6 +72,6 @@ export const AI_MODEL_CONFIGS: Record<AIModelType, AIModelConfig> = {
       "HTTP-Referer": "https://github.com/cuda-cookie/jobly",
       "X-Title": "Jobly Resume",
     }),
-    validate: (context: AIValidationContext) => !!context.openrouterApiKey,
+    validate: (context: AIValidationContext) => true,
   },
 };

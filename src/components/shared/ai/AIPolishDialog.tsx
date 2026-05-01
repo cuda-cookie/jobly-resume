@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useAIConfigStore } from "@/store/useAIConfigStore";
-import { AI_MODEL_CONFIGS } from "@/config/ai";
+import { AI_MODEL_CONFIGS, DEFAULT_OPENROUTER_KEY } from "@/config/ai";
 import { cn } from "@/lib/utils";
 
 interface AIPolishDialogProps {
@@ -134,7 +134,7 @@ export default function AIPolishDialog({
             : selectedModel === "gemini"
               ? geminiApiKey
               : selectedModel === "openrouter"
-                ? openrouterApiKey
+                ? (openrouterApiKey || DEFAULT_OPENROUTER_KEY)
                 : deepseekApiKey;
       const modelId =
         selectedModel === "doubao"

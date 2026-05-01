@@ -8,7 +8,7 @@ const EditButton = (
     RefAttributes<HTMLButtonElement>
 ) => {
   return (
-    <Link href={"/app/dashboard"}>
+    <Link href={"/dashboard"}>
       <Button {...props}>{props.children}</Button>
     </Link>
   );

@@ -3,7 +3,7 @@ import { useTranslations } from "@/i18n/compat/client";
 import { Download, Loader2, ChevronDown } from "lucide-react";
 import { useResumeStore } from "@/store/useResumeStore";
 import { Button } from "@/components/ui/button";
-import { exportResumeAsJson, exportResumeAsMarkdown, exportToPdf } from "@/utils/export";
+import { exportResumeAsJson, exportResumeAsMarkdown } from "@/utils/export";
 import { exportResumeToBrowserPrint } from "@/utils/print";
 import { cn } from "@/lib/utils";
 import {
@@ -17,7 +17,6 @@ import {
 
 import {
   PdfGlassIcon,
-  PrintGlassIcon,
   JsonGlassIcon,
   MarkdownGlassIcon,
 } from "./GlassIcons";
@@ -77,7 +76,6 @@ const ExportCard = ({
 
 const PdfExport = ({ children }: { children?: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
   const [isPrinting, setIsPrinting] = useState(false);
   const [isExportingJson, setIsExportingJson] = useState(false);
   const [isExportingMarkdown, setIsExportingMarkdown] = useState(false);
@@ -85,19 +83,6 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
   const { globalSettings = {}, title } = activeResume || {};
   const t = useTranslations("pdfExport");
   const tBasicField = useTranslations("workbench.basicPanel.basicFields");
-
-  const handleExport = async () => {
-    await exportToPdf({
-      elementId: "resume-preview",
-      title: title || "resume",
-      pagePadding: globalSettings?.pagePadding || 0,
-      fontFamily: globalSettings?.fontFamily,
-      onStart: () => setIsExporting(true),
-      onEnd: () => setIsExporting(false),
-      successMessage: t("toast.success"),
-      errorMessage: t("toast.error")
-    });
-  };
 
   const handleJsonExport = () => {
     exportResumeAsJson({
@@ -152,10 +137,8 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
     }
   };
 
-  const isLoading = isExporting || isExportingJson || isExportingMarkdown || isPrinting;
-  const loadingText = isExporting
-    ? t("button.exporting")
-    : isExportingJson
+  const isLoading = isExportingJson || isExportingMarkdown || isPrinting;
+  const loadingText = isExportingJson
       ? t("button.exportingJson")
       : isExportingMarkdown
         ? t("button.exportingMarkdown")
@@ -200,24 +183,15 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <ExportCard
             icon={PdfGlassIcon}
             title={t("button.exportPdf")}
-            description={t("modal.pdfDesc")}
-            isLoading={isExporting}
-            onClick={handleExport}
-            bgGradientClass="from-rose-500/10 dark:from-rose-500/20"
-            hoverBorderClass="hover:border-rose-500/40 hover:ring-1 hover:ring-rose-500/20"
-          />
-          <ExportCard
-            icon={PrintGlassIcon}
-            title={t("button.print")}
             description={t("modal.printDesc")}
             isLoading={isPrinting}
             onClick={handlePrint}
-            bgGradientClass="from-sky-500/10 dark:from-sky-500/20"
-            hoverBorderClass="hover:border-sky-500/40 hover:ring-1 hover:ring-sky-500/20"
+            bgGradientClass="from-rose-500/10 dark:from-rose-500/20"
+            hoverBorderClass="hover:border-rose-500/40 hover:ring-1 hover:ring-rose-500/20"
           />
           <ExportCard
             icon={JsonGlassIcon}

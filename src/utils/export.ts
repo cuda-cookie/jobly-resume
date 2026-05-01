@@ -6,9 +6,17 @@ import { generateResumeMarkdown, ResumeMarkdownOptions } from "@/utils/markdown"
 
 const INVALID_FILE_NAME_CHAR_REGEX = /[\\/:*?"<>|]/g;
 
-const getSafeFileName = (title?: string) => {
-  const normalized = (title || "resume")
-    .trim()
+const getSafeFileName = (title?: string, resumeName?: string) => {
+  const parts = [];
+  if (resumeName && resumeName.trim()) {
+    parts.push(resumeName.trim());
+  }
+  if (title && title.trim()) {
+    parts.push(title.trim());
+  }
+  
+  const rawFileName = parts.length > 0 ? parts.join(" - ") : "resume";
+  const normalized = rawFileName
     .replace(INVALID_FILE_NAME_CHAR_REGEX, "_")
     .replace(/\s+/g, " ");
 
@@ -135,7 +143,7 @@ export const exportResumeAsJson = ({
     }
 
     const json = JSON.stringify(resume, null, 2);
-    const fileName = `${getSafeFileName(title || resume.title)}.json`;
+    const fileName = `${getSafeFileName(title || resume.title, resume.basic?.name)}.json`;
     downloadTextFile(json, fileName, "application/json;charset=utf-8");
     if (successMessage) toast.success(successMessage);
   } catch (error) {
@@ -163,7 +171,7 @@ export const exportResumeAsMarkdown = ({
     }
 
     const markdown = generateResumeMarkdown(resume, markdownOptions);
-    const fileName = `${getSafeFileName(title || resume.title)}.md`;
+    const fileName = `${getSafeFileName(title || resume.title, resume.basic?.name)}.md`;
     downloadTextFile(markdown, fileName, "text/markdown;charset=utf-8");
     if (successMessage) toast.success(successMessage);
   } catch (error) {

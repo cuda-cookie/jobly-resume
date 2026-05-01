@@ -103,7 +103,7 @@ export const ResumeWorkbench = () => {
 
         setIsCreateModalOpen(false);
         setActiveResume(newId);
-        router.push(`/app/workbench/${newId}`);
+        router.push(`/workbench/${newId}`);
     };
 
     const importResumeFromJson = async (file: File) => {
@@ -124,7 +124,7 @@ export const ResumeWorkbench = () => {
         setActiveResume(resumeId);
         setIsImportDialogOpen(false);
         toast.success(t("dashboard.resumes.importSuccess"));
-        router.push(`/app/workbench/${resumeId}`);
+        router.push(`/workbench/${resumeId}`);
     };
 
     const extractImagesFromPdf = async (file: File) => {
@@ -174,7 +174,7 @@ export const ResumeWorkbench = () => {
     const importResumeFromPdf = async (file: File) => {
         if (!geminiApiKey || !geminiModelId) {
             toast.error(t("dashboard.resumes.importDialog.geminiConfigRequired"));
-            router.push("/app/dashboard/ai");
+            router.push("/dashboard/ai");
             return;
         }
 
@@ -220,7 +220,7 @@ export const ResumeWorkbench = () => {
         setActiveResume(resumeId);
         setIsImportDialogOpen(false);
         toast.success(t("dashboard.resumes.importDialog.pdfSuccess"));
-        router.push(`/app/workbench/${resumeId}`);
+        router.push(`/workbench/${resumeId}`);
     };
 
     const handleJsonFileChange = async (
@@ -289,7 +289,7 @@ export const ResumeWorkbench = () => {
                                     variant="outline"
                                     className="ml-4 hover:bg-green-100 dark:hover:bg-green-900"
                                     onClick={() => {
-                                        router.push("/app/dashboard/settings");
+                                        router.push("/dashboard/settings");
                                     }}
                                 >
                                     <Settings className="w-4 h-4 mr-2" />
@@ -313,7 +313,7 @@ export const ResumeWorkbench = () => {
                                     size="sm"
                                     className="ml-4 hover:bg-red-100 dark:hover:bg-red-900"
                                     onClick={() => {
-                                        router.push("/app/dashboard/settings");
+                                        router.push("/dashboard/settings");
                                     }}
                                 >
                                     <Settings className="w-4 h-4 mr-2" />

@@ -73,6 +73,8 @@ interface TemplateCardItemProps {
   useTemplateLabel: string;
 }
 
+import { Loader2 } from "lucide-react";
+
 const TemplateCardItem = ({
   index,
   template,
@@ -87,6 +89,7 @@ const TemplateCardItem = ({
 }: TemplateCardItemProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.24);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -121,12 +124,16 @@ const TemplateCardItem = ({
         className={cn(
           "group border transition-all duration-200 aspect-[210/297] flex flex-col overflow-hidden",
           "hover:border-primary/40 hover:shadow-lg",
-          "dark:hover:border-primary/40"
+          "dark:hover:border-primary/40",
+          isNavigating && "opacity-80 pointer-events-none"
         )}
       >
         <CardContent
           className="p-0 flex-1 relative bg-gray-50 dark:bg-gray-900 overflow-hidden cursor-pointer"
-          onClick={onPreview}
+          onClick={() => {
+            setIsNavigating(true);
+            onUseTemplate();
+          }}
         >
           <div
             className="absolute inset-0 pb-6 flex items-center justify-center pointer-events-none transition-transform duration-300 group-hover:scale-[1.02] overflow-hidden"
@@ -173,6 +180,7 @@ const TemplateCardItem = ({
                 variant="outline"
                 className="w-full text-sm hover:bg-gray-100 dark:border-primary/50 dark:hover:bg-primary/10"
                 size="sm"
+                disabled={isNavigating}
                 onClick={(e) => {
                   e.stopPropagation();
                   onPreview();
@@ -190,12 +198,14 @@ const TemplateCardItem = ({
               <Button
                 className="w-full text-sm"
                 size="sm"
+                disabled={isNavigating}
                 onClick={(e) => {
                   e.stopPropagation();
+                  setIsNavigating(true);
                   onUseTemplate();
                 }}
               >
-                {useTemplateLabel}
+                {isNavigating ? <Loader2 className="w-4 h-4 animate-spin" /> : useTemplateLabel}
               </Button>
             </motion.div>
           </div>
@@ -266,7 +276,7 @@ const TemplatesPage = () => {
       });
     }
 
-    router.push(`/app/workbench/${resumeId}`);
+    router.push(`/workbench/${resumeId}`);
   };
 
   return (

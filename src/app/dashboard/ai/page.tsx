@@ -44,7 +44,7 @@ const AISettingsPage = () => {
       link: "https://openrouter.ai/keys",
       color: "text-blue-600",
       bgColor: "bg-blue-50 dark:bg-blue-950/50",
-      isConfigured: !!openrouterApiKey,
+      isConfigured: true,
     }
   ];
 
@@ -66,7 +66,7 @@ const AISettingsPage = () => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <Label className="text-base font-semibold">
-                  OpenRouter API Key
+                  OpenRouter API Key (Optional)
                 </Label>
                 <a
                   href="https://openrouter.ai/keys"
@@ -82,7 +82,7 @@ const AISettingsPage = () => {
                 value={openrouterApiKey}
                 onChange={handleApiKeyChange}
                 type="password"
-                placeholder="sk-or-v1-..."
+                placeholder="Leave empty to use the built-in default key..."
                 className={cn(
                   "h-12 text-lg",
                   "bg-gray-50 dark:bg-gray-950",
@@ -91,7 +91,7 @@ const AISettingsPage = () => {
                 )}
               />
               <p className="text-sm text-muted-foreground">
-                Your API key is stored locally in your browser and never sent to our servers.
+                You can bring your own key (BYOK) for higher rate limits. If left empty, the built-in default key will be used. Your API key is stored locally in your browser.
               </p>
             </div>
 
@@ -112,8 +112,8 @@ const AISettingsPage = () => {
         </div>
 
         <div className="flex items-center gap-2 text-sm text-muted-foreground justify-center">
-          <Check className={cn("h-4 w-4", openrouterApiKey ? "text-green-500" : "text-gray-300")} />
-          {openrouterApiKey ? "Ready to use AI features" : "Configuration required to use AI features"}
+          <Check className={cn("h-4 w-4", "text-green-500")} />
+          Ready to use AI features
         </div>
       </div>
     </div>

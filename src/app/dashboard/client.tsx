@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { IconResumes, IconTemplates, IconSettings, IconAI } from "@/components/shared/icons/SidebarIcons";
 import { usePathname, useRouter } from "@/lib/navigation";
 import {
@@ -38,22 +39,22 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const sidebarItems: MenuItem[] = [
     {
       title: t("sidebar.resumes"),
-      url: "/app/dashboard/resumes",
+      url: "/dashboard/resumes",
       icon: IconResumes,
     },
     {
       title: t("sidebar.templates"),
-      url: "/app/dashboard/templates",
+      url: "/dashboard/templates",
       icon: IconTemplates,
     },
     {
       title: t("sidebar.ai"),
-      url: "/app/dashboard/ai",
+      url: "/dashboard/ai",
       icon: IconAI,
     },
     {
       title: t("sidebar.settings"),
-      url: "/app/dashboard/settings",
+      url: "/dashboard/settings",
       icon: IconSettings,
     },
 
@@ -77,9 +78,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   const isItemActive = (item: MenuItem) => {
     if (item.items) {
-      return item.items.some((subItem) => pathname === subItem.href);
+      return item.items.some((subItem) => pathname.endsWith(subItem.href));
     }
-    return item.url === pathname || item.href === pathname;
+    const itemPath = item.url || item.href || "";
+    return pathname === itemPath || pathname.endsWith(itemPath);
   };
 
   return (
@@ -122,20 +124,37 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
                                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                                   }`}
                               >
-                                <div
-                                  className="flex items-center gap-2 px-2 cursor-pointer"
-                                  onClick={() => handleItemClick(item)}
-                                >
-                                  <item.icon
-                                    size={24}
-                                    active={active}
-                                  />
-                                  {open && (
-                                    <span className="flex-1 text-sm">
-                                      {item.title}
-                                    </span>
-                                  )}
-                                </div>
+                                {item.items ? (
+                                  <div
+                                    className="flex items-center gap-2 px-2 cursor-pointer"
+                                    onClick={() => handleItemClick(item)}
+                                  >
+                                    <item.icon
+                                      size={24}
+                                      active={active}
+                                    />
+                                    {open && (
+                                      <span className="flex-1 text-sm">
+                                        {item.title}
+                                      </span>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <Link
+                                    href={item.url || item.href || "/"}
+                                    className="flex items-center gap-2 px-2 cursor-pointer"
+                                  >
+                                    <item.icon
+                                      size={24}
+                                      active={active}
+                                    />
+                                    {open && (
+                                      <span className="flex-1 text-sm">
+                                        {item.title}
+                                      </span>
+                                    )}
+                                  </Link>
+                                )}
                               </SidebarMenuButton>
                               {item.items && open && (
                                 <div className="ml-9 mt-1 space-y-1 border-l-2 border-muted pl-2">
